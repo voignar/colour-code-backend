@@ -2,13 +2,14 @@
     include('conexion.php');
     $sql = "SELECT * FROM codigos";
 
-    $rs = pg_query($conexion, $sql );
+    $consulta = $conexion->query($sql);
+    $codigos = $consulta->fetchAll(PDO::FETCH_OBJ);
     $respuesta = array();
-    $cont = 0;
-    while( $obj = pg_fetch_object($rs) ){
-        $respuesta[$cont]["codigo"] = $obj->codigo;
-        $respuesta[$cont]["puntuacion"] = $obj->puntuacion;
-        $respuesta[$cont]["votos"] = $obj->votos;
+    foreach($codigos as $cod){
+        $c["codigo"] = $cod->codigo;
+        $c["puntuacion"] = $cod->puntuacion;
+        $c["votos"] = $cod->votos;
+        array_push($respuesta, $c);
     }
     echo json_encode($respuesta);
 ?>
