@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const router = Router();
-const { getCodigos } = require('../controllers/index.controllers');
+const { getCodigos, createCodigo } = require('../controllers/index.controllers');
 
 router.get("/codigos", getCodigos);
+router.post("/nuevo-codigo", createCodigo);
 
 module.exports = router;

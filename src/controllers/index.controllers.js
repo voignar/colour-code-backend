@@ -10,9 +10,12 @@ const pool = new Pool({
 
 const getCodigos = async (req, res) => {
     const respuesta = await pool.query('SELECT * FROM codigos');
-    console.log(respuesta.rows);
-    res.send(respuesta.rows);
+    res.status(200).json(respuesta.rows);
+}
+
+const createCodigo = async (req, res) => {
+    
 }
 
 module.exports = {
-    getCodigos}
+    getCodigos, createCodigo}
