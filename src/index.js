@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+const cors = require("cors");
 
 // middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
