@@ -15,6 +15,11 @@ const getCodigos = async (req, res) => {
 
 const createCodigo = async (req, res) => {
     const { codigo, puntuacion } = req.body;
+    if(puntuacion > 0){
+        puntuacion = 1;
+    }else{
+        puntuacion = -1;
+    }
     const respuesta1 = await pool.query("SELECT * FROM codigos WHERE codigo = $1", [codigo]);
     if (respuesta1.rowCount > 0) {
         await pool.query("UPDATE codigos SET puntuacion = puntuacion + $1, votos = votos + 1 WHERE codigo = $2", [puntuacion, codigo]);
