@@ -14,7 +14,7 @@ const getCodigos = async (req, res) => {
 }
 
 const createCodigo = async (req, res) => {
-    const { codigo, puntuacion } = req.body;
+    let { codigo, puntuacion } = req.body;
     if(puntuacion > 0){
         puntuacion = 1;
     }else{
