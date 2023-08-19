@@ -1,8 +1,8 @@
 <?php
-$usuario = "fl0user";
-$pass = "u7PBQOobeh0L";
-$host = "ep-purple-glade-95536331.eu-central-1.aws.neon.tech";
-$bd = "colourcode";
+$usuario = $_ENV["usuario"];
+$pass = $_ENV["pass"];
+$host = $_ENV["host"];
+$bd = $_ENV["db"];
 
 $conexion = pg_connect( "user=".$usuario." ".
                                 "password=".$pass." ".
