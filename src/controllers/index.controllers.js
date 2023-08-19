@@ -1,6 +1,17 @@
+const { Pool } = require("pg");
 
-const getCodigos = (req, res) => {
-    res.send("Listado de colores");
+const pool = new Pool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    ssl: true
+})
+
+const getCodigos = async (req, res) => {
+    const respuesta = await pool.query('SELECT * FROM codigos');
+    console.log(respuesta.rows);
+    res.send(respuesta.rows);
 }
 
 module.exports = {
