@@ -9,7 +9,15 @@ const pool = new Pool({
 })
 
 const getCodigos = async (req, res) => {
-    const respuesta = await pool.query('SELECT * FROM codigos');
+    const { pagina, cantidad } = req.body;
+    console.log(pagina, cantidad);
+    let respuesta;
+    if(!pagina && !cantidad){
+        respuesta = await pool.query('SELECT * FROM codigos ORDER BY puntuacion DESC LIMIT 10');
+    }else{
+        console.log(pagina, cantidad);
+        respuesta = await pool.query('SELECT * FROM codigos ORDER BY puntuacion DESC LIMIT $1 OFFSET $2', [cantidad, pagina*cantidad]);
+    }
     res.status(200).json(respuesta.rows);
 }
 
